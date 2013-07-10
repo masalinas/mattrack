@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>mattrack</artifactId>
+		<groupId>com.thingtrack</groupId>
+		<version>0.0.1.SNAPSHOT</version>
+	</parent>
+	<artifactId>mattrack.modules</artifactId>
+	<packaging>pom</packaging>
+	<name>mattrack.modules</name>
+	<modules>
+		<module>mattrack.view.module.counter</module>
+	</modules>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>formbinder</artifactId>
+			<version>2.1.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addon</groupId>
+			<artifactId>confirmdialog</artifactId>
+			<version>1.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>org.tepi.filtertable</artifactId>
+			<version>0.7.3</version>
+		</dependency>
+		
+		<!-- Konekti Domain Layer -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.domain</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Service API -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Kernel -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.kernel</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Custom Addons -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Forms -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.web.form</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

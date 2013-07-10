@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.thingtrack</groupId>
+		<version>0.0.1.SNAPSHOT</version>
+		<artifactId>mattrack.core</artifactId>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>mattrack.web.api</artifactId>
+	<packaging>war</packaging>
+	<name>Mattrack web API</name>
+	<description>Mattrack web API</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gwt.version>2.3.0</gwt.version>
+		<gwt.plugin.version>2.2.0</gwt.plugin.version>
+		<slf4j.version>1.5.0</slf4j.version>
+		<spring.maven.artifact.version>3.0.5.RELEASE</spring.maven.artifact.version>
+	</properties>
+
+	<!-- ================================================ -->
+	<!-- Dependencies Configuration -->
+	<!-- ================================================ -->
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>	
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>3.2.3.RELEASE</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+	        <groupId>org.springframework.osgi</groupId>
+	        <artifactId>spring-osgi-annotation</artifactId>
+	        <version>1.0</version>
+	        <scope>provided</scope>
+		</dependency>
+      
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>1.4.0</version>
+			<scope>provided</scope>
+		</dependency>
+                        
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>mattrack.domain</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>		
+				
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>mattrack.service.api</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>		
+	</dependencies>
+
+	<!-- ================================================ -->
+	<!-- Build Configuration -->
+	<!-- ================================================ -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.virgo.bundlor</groupId>
+				<artifactId>org.eclipse.virgo.bundlor.maven</artifactId>
+				<version>1.1.1.RELEASE</version>
+				<configuration>
+					<outputPath>${basedir}/src/main/resources</outputPath>
+					<manifestTemplate>
+					<![CDATA[
+Bundle-ManifestVersion: 2
+Bundle-Name: ${project.name}
+Bundle-Description: ${description}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Built-By: ${organization.name}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.eclipse.virgo.web.dm, 
+ org.aspectj.lang,
+ org.aspectj.lang.annotation, 
+ org.aspectj.runtime.reflect,
+ org.slf4j;version="[1.6.1,2)",
+ org.slf4j.helpers;version="[1.6.1,2)",
+ org.slf4j.spi;version="[1.6.1,2)",
+ org.slf4j.impl;version="[1.6.1,2)",
+ org.apache.log4j,
+ javax.persistence.metamodel,
+ org.springframework.osgi.extensions.annotation,
+ com.thingtrack.mattrack.domain,
+ com.thingtrack.mattrack.service.api
+Web-ContextPath: mattrack
+Bundle-Classpath: WEB-INF/classes,
+ WEB-INF/lib/gwt-user-2.3.0.jar,
+ WEB-INF/lib/gwt-servlet-2.3.0.jar
+Excluded-Exports: 
+ *.internal*
+Unversioned-Imports: 
+ *
+Import-Library: 
+ org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
+]]>
+					</manifestTemplate>
+				</configuration>
+				<!-- generate the manifest automatically during packaging -->
+				<executions>
+					<execution>
+						<id>bundlor</id>
+						<goals>
+							<goal>bundlor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+					<webResources>
+						<webResource>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>META-INF/MANIFEST.MF</include>
+								<include>META-INF/*.xml</include>
+							</includes>
+						</webResource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
